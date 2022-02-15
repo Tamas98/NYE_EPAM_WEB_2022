@@ -1,19 +1,16 @@
 package org.example.view;
 
 import org.example.domain.coin.supplier.CoinListSupplier;
+import org.example.service.CoinSearcher;
 import org.example.service.CoinSearcherService;
 import org.example.service.comparator.CoinChangePercentageComparator;
 
 public class PrintCoins {
 
-    private final CoinListSupplier coinListSupplier;
-    private final CoinChangePercentageComparator coinChangePercentageComparator;
-    private final CoinSearcherService coinSearcherService;
+    private final CoinSearcher coinSearcherService;
 
-    public PrintCoins() {
-        coinListSupplier = new CoinListSupplier();
-        coinChangePercentageComparator = new CoinChangePercentageComparator();
-        coinSearcherService = new CoinSearcherService(coinListSupplier, coinChangePercentageComparator);
+    public PrintCoins(CoinSearcher coinSearcherService) {
+        this.coinSearcherService = coinSearcherService;
     }
 
     public void printTopGainers() {
