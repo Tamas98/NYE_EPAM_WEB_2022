@@ -1,19 +1,17 @@
 package org.example.view;
 
-import org.example.domain.coin.supplier.CoinListSupplier;
 import org.example.service.CoinSearcherService;
-import org.example.service.comparator.CoinChangePercentageComparator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrintCoins {
 
-    private final CoinListSupplier coinListSupplier;
-    private final CoinChangePercentageComparator coinChangePercentageComparator;
     private final CoinSearcherService coinSearcherService;
 
-    public PrintCoins() {
-        coinListSupplier = new CoinListSupplier();
-        coinChangePercentageComparator = new CoinChangePercentageComparator();
-        coinSearcherService = new CoinSearcherService(coinListSupplier, coinChangePercentageComparator);
+    @Autowired
+    public PrintCoins(CoinSearcherService coinSearcherService) {
+        this.coinSearcherService = coinSearcherService;
     }
 
     public void printTopGainers() {

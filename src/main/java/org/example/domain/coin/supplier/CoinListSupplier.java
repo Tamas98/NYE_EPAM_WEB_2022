@@ -3,6 +3,7 @@ package org.example.domain.coin.supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.domain.coin.Coin;
 import org.example.domain.coin.CoinList;
+import org.springframework.stereotype.Component;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+@Component
 public class CoinListSupplier implements Supplier<CoinList> {
 
     private static long lastUpdate = 0;
