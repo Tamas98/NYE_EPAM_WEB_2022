@@ -1,8 +1,8 @@
-package org.example.domain.coin.supplier;
+package org.example.domain.requestedCoin.supplier;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.domain.coin.Coin;
-import org.example.domain.coin.CoinList;
+import org.example.domain.requestedCoin.RequestedCoin;
+import org.example.domain.requestedCoin.CoinList;
 import org.springframework.stereotype.Component;
 
 import java.io.DataInputStream;
@@ -21,9 +21,9 @@ public class CoinListSupplier implements Supplier<CoinList> {
     public CoinList get() {
         try {
             if(isEnoughTimeSinceLastUpdate() || lastUpdate == 0) {
-                Coin[] coins = getDataFromApi();
+                RequestedCoin[] requestedCoins = getDataFromApi();
                 lastUpdate = System.currentTimeMillis();
-                return CoinList.getInstance(Arrays.asList(coins));
+                return CoinList.getInstance(Arrays.asList(requestedCoins));
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -32,14 +32,14 @@ public class CoinListSupplier implements Supplier<CoinList> {
         return CoinList.getInstance();
     }
 
-    private Coin[] getDataFromApi() throws IOException {
+    private RequestedCoin[] getDataFromApi() throws IOException {
         URL url = new URL("https://api2.binance.com/api/v3/ticker/24hr");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setDoOutput(true);
         DataInputStream in = new DataInputStream(connection.getInputStream());
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(in.readLine(), Coin[].class);
+        return mapper.readValue(in.readLine(), RequestedCoin[].class);
     }
 
     private boolean isEnoughTimeSinceLastUpdate() {

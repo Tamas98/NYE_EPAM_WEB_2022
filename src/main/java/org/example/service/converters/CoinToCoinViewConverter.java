@@ -7,10 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CoinToCoinViewConverter implements Converter<Coin, CoinView> {
-
     @Override
-    public CoinView convert(Coin coin) {
-        return new CoinView(coin.getSymbol(), coin.getPriceChange(), coin.getPriceChangePercent(), coin.getOpenPrice(), coin.getHighPrice(), coin.getLowPrice());
+    public CoinView convert(Coin source) {
+        return new CoinView(source.getSymbol(),source.getPriceChange(), source.getPriceChangePercent(), source.getOpenPrice(), source.getHighPrice(), source.getLowPrice());
     }
-
 }

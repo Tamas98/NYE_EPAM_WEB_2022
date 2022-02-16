@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.service.CoinSearcherService;
+import org.example.service.searcher.CoinSearcherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
